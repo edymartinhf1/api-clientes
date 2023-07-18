@@ -55,16 +55,16 @@ public class ClientesController {
     }
 
     /**
+     * Permite Actualizar clientes
      * @param cliente
      * @return
      */
     @PutMapping
     public Mono<Cliente> modifyCliente(@RequestBody ClientePost cliente,@PathVariable String id) {
         return clienteServiceI.findById(id)
-                .flatMap(c-> {
-                    return clienteServiceI.save(fromClientePostToClienteDao(cliente))
-                            .map(this::fromClienteDaoToClienteDto);
-                });
+                .flatMap(c-> clienteServiceI
+                        .save(fromClientePostToClienteDao(cliente))
+                        .map(this::fromClienteDaoToClienteDto));
     }
 
     /**
