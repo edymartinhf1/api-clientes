@@ -10,5 +10,7 @@ public interface ClienteServiceI {
 
     Mono<ClienteDao> save(ClienteDao clienteDao);
 
+    Mono<ClienteDao> update(ClienteDao clienteDao,String id);
+
     void deleteById(String id);
 }

@@ -59,19 +59,17 @@ public class ClientesController {
      * @param cliente
      * @return
      */
-    @PutMapping
+    @PutMapping("/{id}")
     public Mono<Cliente> modifyCliente(@RequestBody ClientePost cliente,@PathVariable String id) {
-        return clienteServiceI.findById(id)
-                .flatMap(c-> clienteServiceI
-                        .save(fromClientePostToClienteDao(cliente))
-                        .map(this::fromClienteDaoToClienteDto));
+        return clienteServiceI.update(fromClientePostToClienteDao(cliente),id)
+                .map(this::fromClienteDaoToClienteDto);
     }
 
     /**
      * Permite eliminar clientes
      * @param id
      */
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteCliente(@PathVariable String id) {
         clienteServiceI.deleteById(id);
     }

@@ -1,5 +1,6 @@
 package com.bootcamp.bank.clientes.service.impl;
 
+import com.bootcamp.bank.clientes.exception.BusinessException;
 import com.bootcamp.bank.clientes.model.dao.ClienteDao;
 import com.bootcamp.bank.clientes.model.dao.repository.ClienteRepository;
 import com.bootcamp.bank.clientes.service.ClienteServiceI;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * Clase Servicio clientes
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -29,6 +33,13 @@ public class ClienteServiceImpl implements ClienteServiceI {
     @Override
     public Mono<ClienteDao> save(ClienteDao clienteDao) {
         return clienteRepository.save(clienteDao);
+    }
+
+    @Override
+    public Mono<ClienteDao> update(ClienteDao clienteDao,String id) {
+        return findById(id)
+                .switchIfEmpty(Mono.error(()->new BusinessException("No existe cliente con el id "+id)))
+                .flatMap(c->save(clienteDao));
     }
 
     @Override
