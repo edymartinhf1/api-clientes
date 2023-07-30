@@ -5,6 +5,7 @@ import com.bootcamp.bank.clientes.model.ClientePost;
 import com.bootcamp.bank.clientes.model.dao.ClienteDao;
 import com.bootcamp.bank.clientes.service.ClienteServiceI;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -16,6 +17,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/clientes")
 @RequiredArgsConstructor
+@Log4j2
 public class ClientesController {
 
     private final ClienteServiceI clienteServiceI;
@@ -43,6 +45,13 @@ public class ClientesController {
                 .map(this::fromClienteDaoToClienteDto);
     }
 
+    @GetMapping("/celular/{id}")
+    public Mono<Cliente> findClienteByNumeroCelular(@PathVariable String numeroCelular) {
+        return clienteServiceI.findByNumeroCelular(numeroCelular)
+                .map(this::fromClienteDaoToClienteDto);
+    }
+
+
     /**
      * Permite Registrar clientes
      * @param cliente
@@ -50,6 +59,7 @@ public class ClientesController {
      */
     @PostMapping
     public Mono<Cliente> createCliente(@RequestBody ClientePost cliente) {
+        log.info("cliente "+cliente.toString());
         return clienteServiceI.save(this.fromClientePostToClienteDao(cliente))
                 .map(this::fromClienteDaoToClienteDto);
     }

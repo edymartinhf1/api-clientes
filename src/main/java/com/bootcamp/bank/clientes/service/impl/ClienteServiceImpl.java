@@ -31,6 +31,11 @@ public class ClienteServiceImpl implements ClienteServiceI {
     }
 
     @Override
+    public Mono<ClienteDao> findByNumeroCelular(String numeroCelular) {
+        return clienteRepository.findByNumeroCelular(numeroCelular);
+    }
+
+    @Override
     public Mono<ClienteDao> save(ClienteDao clienteDao) {
         return clienteRepository.save(clienteDao);
     }

@@ -69,4 +69,22 @@ class ApiClientesApplicationTests {
 
 	}
 
+	@Test
+	void findByIdCliente(){
+
+		ClienteDao clientNuevo=new ClienteDao();
+		clientNuevo.setNombre("CARLOS GUZMAN TEST");
+		clientNuevo.setTipoCli("PER");
+		clientNuevo.setLimiteCredito(20000.00);
+		clientNuevo.setNroDocumento("88765424");
+		clientNuevo.setTipoDocumento("DNI");
+		Mono<ClienteDao> cliente= clienteServiceI.save(clientNuevo);
+		ClienteDao clienteDao= cliente.block();
+
+		Mono<ClienteDao> clienteFind= clienteServiceI.findById(clienteDao.getId());
+		ClienteDao clienteF= clienteFind.block();
+		assertNotNull(clienteF);
+
+	}
+
 }
