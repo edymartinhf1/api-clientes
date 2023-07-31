@@ -32,7 +32,7 @@ public class ClienteServiceImpl implements ClienteServiceI {
 
     @Override
     public Mono<ClienteDao> findByNumeroCelular(String numeroCelular) {
-        return clienteRepository.findByNumeroCelular(numeroCelular);
+        return clienteRepository.findByNumeroCelular(numeroCelular).filter(cliente->cliente.getTipoCli().equals("PER")).next();
     }
 
     @Override

@@ -45,7 +45,7 @@ public class ClientesController {
                 .map(this::fromClienteDaoToClienteDto);
     }
 
-    @GetMapping("/celular/{id}")
+    @GetMapping("/celular/{numeroCelular}")
     public Mono<Cliente> findClienteByNumeroCelular(@PathVariable String numeroCelular) {
         return clienteServiceI.findByNumeroCelular(numeroCelular)
                 .map(this::fromClienteDaoToClienteDto);
