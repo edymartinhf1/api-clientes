@@ -35,7 +35,7 @@ class ApiClientesApplicationTests {
 		client.setNombre("EDUARDO SANCHEZ GUZMAN");
 		client.setTipoCli("EMP");
 		client.setLimiteCredito(30000.00);
-		client.setNroDocumento("98765423");
+		client.setNumeroDocumento("98765423");
 		client.setTipoDocumento("DNI");
 		Mono<ClienteDao> cliente= clienteServiceI.save(client);
 		ClienteDao clienteDao= cliente.block();
@@ -50,7 +50,7 @@ class ApiClientesApplicationTests {
 		clientNuevo.setNombre("MARIELA SANTOS GUZMAN TEST");
 		clientNuevo.setTipoCli("EMP");
 		clientNuevo.setLimiteCredito(20000.00);
-		clientNuevo.setNroDocumento("98765424");
+		clientNuevo.setNumeroDocumento("98765424");
 		clientNuevo.setTipoDocumento("DNI");
 		Mono<ClienteDao> cliente= clienteServiceI.save(clientNuevo);
 		ClienteDao clienteDao= cliente.block();
@@ -61,7 +61,7 @@ class ApiClientesApplicationTests {
 		clientUpdate.setNombre("MARIELA SANTOS GUZMAN TEST 2");
 		clientUpdate.setTipoCli("EMP");
 		clientUpdate.setLimiteCredito(30000.00);
-		clientUpdate.setNroDocumento("98765423");
+		clientUpdate.setNumeroDocumento("98765423");
 		clientUpdate.setTipoDocumento("DNI");
 		Mono<ClienteDao> clienteup= clienteServiceI.update(clientUpdate,id);
 		assertNotNull(clienteup);
@@ -76,7 +76,7 @@ class ApiClientesApplicationTests {
 		clientNuevo.setNombre("CARLOS GUZMAN TEST");
 		clientNuevo.setTipoCli("PER");
 		clientNuevo.setLimiteCredito(20000.00);
-		clientNuevo.setNroDocumento("88765424");
+		clientNuevo.setNumeroDocumento("88765424");
 		clientNuevo.setTipoDocumento("DNI");
 		Mono<ClienteDao> cliente= clienteServiceI.save(clientNuevo);
 		ClienteDao clienteDao= cliente.block();
